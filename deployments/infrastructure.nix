@@ -70,7 +70,24 @@ with (import ./../lib.nix);
         openssh.authorizedKeys.keys = [domenKey georgeeeKey kosergeKey jakeKey];
       };
       groups.live-production = {};
+    };
 
+    deployment.keys.tarsnap.text = getKey ./../static/tarsnap-cardano-deployer.secret;
+    services.tarsnap = {
+      enable = true;
+      # TODO: /run/keys does not persist across reboots
+      keyfile = "/run/keys/tarsnap";
+      archives.cardano-deployer = {
+        directories = [
+          "/home/staging/.ec2-keys"
+          "/home/staging/.aws"
+          "/home/staging/.nixops"
+          "/home/live-production/.ec2-keys"
+          "/home/live-production/.aws"
+          "/home/live-production/.nixops"
+          "/etc/"
+        ];
+      };
     };
 
     networking.firewall.allowedTCPPortRanges = [

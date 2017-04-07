@@ -9,6 +9,7 @@ install:
   - nixops create deployments/cardano.nix -d csl
   - nixops create deployments/timewarp.nix -d tw
   - nixops create deployments/infrastructure.nix -d inf
+  - echo "secret" > static/tarsnap-cardano-deployer.secret
 script:
   - ./CardanoCSL.hs --help
   - ./TimeWarp.hs --help
