@@ -12,6 +12,8 @@ with (import ./../lib.nix);
       autoStart = true;
     };
 
+    imports = [ ./common.nix ];
+
     networking.firewall.allowedTCPPorts = [
       80 # nginx
       8110 # websocket
@@ -20,7 +22,7 @@ with (import ./../lib.nix);
     services.nginx = {
       enable = true;
       virtualHosts = {
-        "cardano-explorer-dev.iohk.io" = {
+        "explorer.iohkdev.io" = {
           # TLS provided by cloudfront
           locations = {
             "/" = {

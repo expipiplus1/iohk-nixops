@@ -5,6 +5,10 @@ in lib // (rec {
   genAttrs' = names: fkey: fname:
     lib.listToAttrs (map (n: lib.nameValuePair (fkey n) (fname n)) names);
 
+  # Given a list of integers and a function,
+  # generate an attribute set with that many nodes and call the function with node index
+  genNodes = ids: fname: genAttrs' ids (i: "node${toString i}") fname;
+
   # modulo operator
   # mod 11 10 == 1
   # mod 1 10 == 1

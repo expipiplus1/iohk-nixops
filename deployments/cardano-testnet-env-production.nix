@@ -28,4 +28,4 @@ let
 in {
   report-server = conf;
   sl-explorer = conf;
-} // (genAttrs' (range 0 13) (key: "node${toString key}") (name: conf))
+} // (genNodes (range 0 13) (i: conf))
