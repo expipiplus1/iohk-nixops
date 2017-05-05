@@ -13,10 +13,6 @@ let
       enable = true;
       port = cconf.nodePort;
       testIndex = testIndex;
-      dhtKey = genDhtKey { i = testIndex; };
-      stats = false;
-      jsonLog = true;
-      distribution = true;
       inherit (cconf) enableP2P genesisN slotDuration networkDiameter mpcRelayInterval totalMoneyAmount bitcoinOverFlat productionMode systemStart richPoorDistr;
     };
   } // optionalAttrs (generatingAMI == false) ({

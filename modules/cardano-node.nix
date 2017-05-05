@@ -108,7 +108,7 @@ in {
       mpcRelayInterval = mkOption { type = types.int; };
 
       stats = mkOption { type = types.bool; default = false; };
-      jsonLog = mkOption { type = types.bool; default = false; };
+      jsonLog = mkOption { type = types.bool; default = true; };
       totalMoneyAmount = mkOption { type = types.int; default = 100000; };
       distribution = mkOption {
         type = types.bool;
@@ -145,6 +145,8 @@ in {
         gid = 123123;
       };
     };
+
+    services.cardano-node.dhtKey = mkDefault (genDhtKey { i = cfg.testIndex; });
 
     # Workaround for CSL-1029
     services.cron.systemCronJobs =
