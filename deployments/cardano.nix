@@ -58,9 +58,7 @@ in
       ./../modules/report-server.nix
     ];
 
-    services.report-server = {
-      enable = true;
-    };
+    services.report-server.enable = true;
 
     deployment.ec2.elasticIPv4 = resources.elasticIPs.report-server-ip;
   };

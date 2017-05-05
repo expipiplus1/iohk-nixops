@@ -1,4 +1,4 @@
-{ config, resources, pkgs, ... }:
+{ config, pkgs, ... }:
 
 with (import ./../lib.nix);
 

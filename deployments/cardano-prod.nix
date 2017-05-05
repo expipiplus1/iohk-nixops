@@ -1,7 +1,7 @@
 with (import ./../lib.nix);
 
 let
-  conf = { config, pkgs, resources, ... }: {
+  conf = { config, pkgs, ... }: {
     imports = [
       ./../modules/datadog.nix
       ./../modules/papertrail.nix
