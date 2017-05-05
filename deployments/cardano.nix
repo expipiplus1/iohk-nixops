@@ -26,14 +26,6 @@ let
       #};
   });
 
-  cardano-node-coordinator = {testIndex, region, keypair}: {resources, pkgs, ...}: {
-    imports = [ (nodeGenericConfig testIndex region keypair) ];
-
-    services.cardano-node = {
-      timeLord = true;
-    };
-  };
-
   cardano-node = {testIndex, region, keypair}: {pkgs, ...}: {
     imports = [ (nodeGenericConfig testIndex region keypair) ];
   };
@@ -47,10 +39,9 @@ let
   cardano-node-ap-southeast-2 = regionIndex "ap-southeast-2" (pairs: pairs.cardano-test-ap-southeast-2);
   cardano-node-ap-northeast-1 = regionIndex "ap-northeast-1" (pairs: pairs.cardano-test-ap-northeast-1);
   cardano-node-ap-northeast-2 = regionIndex "ap-northeast-2" (pairs: pairs.cardano-test-ap-northeast-2);
-
 in
   # NOTE: Also update resources at the bottom
-  (genAttrs' (range 1 1) (key: "node${toString key}") (name: cardano-node-eu-central name)) //
+  (genAttrs' (range 0 1) (key: "node${toString key}") (name: cardano-node-eu-central name)) //
   (genAttrs' (range 2 3) (key: "node${toString key}") (name: cardano-node-eu-west-1 name)) //
   (genAttrs' (range 4 5) (key: "node${toString key}") (name: cardano-node-eu-west-2 name)) //
   (genAttrs' (range 6 7) (key: "node${toString key}") (name: cardano-node-ap-southeast-1 name)) //
@@ -58,9 +49,7 @@ in
   (genAttrs' (range 10 11) (key: "node${toString key}") (name: cardano-node-ap-northeast-1 name)) //
   (genAttrs' (range 12 13) (key: "node${toString key}") (name: cardano-node-ap-northeast-2 name)) //
 {
-  network.description = "Cardano SL experiments";
-
-  node0 = cardano-node-coordinator { testIndex = 0; region = "eu-central-1"; keypair = (pairs: pairs.cardano-test-eu-central); };
+  network.description = "Cardano SL";
 
   report-server = { pkgs, config, lib, resources, ...}: {
     imports = [

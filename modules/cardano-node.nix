@@ -58,7 +58,6 @@ let
     (optionalString cfg.productionMode "--keyfile ${stateDir}key${toString (cfg.testIndex + 1)}.sk")
     (optionalString (cfg.productionMode && cfg.systemStart != 0) "--system-start ${toString cfg.systemStart}")
     (optionalString cfg.supporter "--supporter")
-    (optionalString cfg.timeLord "--time-lord")
     "--log-config ${./../static/csl-logging.yaml}"
     "--logs-prefix /var/lib/cardano-node"
     (optionalString (!cfg.enableP2P) "--explicit-initial --disable-propagation ${smartGenPeer}")
@@ -80,7 +79,6 @@ in {
 
       enableP2P = mkOption { type = types.bool; default = false; };
       supporter = mkOption { type = types.bool; default = false; };
-      timeLord = mkOption { type = types.bool; default = false; };
       dhtKey = mkOption {
         type = types.string;
         description = "base64-url string describing dht key";
